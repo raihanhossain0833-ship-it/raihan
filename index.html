@@ -32,7 +32,7 @@
 
 html { scroll-behavior: smooth; }
 
-body{
+body {
   background: var(--black);
   color: var(--white);
   font-family: var(--font);
@@ -523,7 +523,7 @@ section {
   gap: 20px;
 }
 .skill-item { }
-.skillt-op {
+.skill-top {
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
@@ -2129,55 +2129,7 @@ try {
   localStorage.setItem('rh_visitors', count);
   document.getElementById('visitor-count').textContent = String(count).padStart(5, '0');
 } catch(e) {}
-/* ==========================================
-   Premium Pull To Refresh
-========================================== */
-
-let pullStart = 0;
-let refreshLock = false;
-
-window.addEventListener("touchstart",function(e){
-
-pullStart=e.touches[0].clientY;
-
-});
-
-window.addEventListener("touchmove",function(e){
-
-let current=e.touches[0].clientY;
-
-if(window.scrollY===0 && current-pullStart>120){
-
-document.getElementById("pullRefresh").classList.add("show");
-
-}
-
-});
-
-window.addEventListener("touchend",function(){
-
-let box=document.getElementById("pullRefresh");
-
-if(box.classList.contains("show") && !refreshLock){
-
-refreshLock=true;
-
-setTimeout(function(){
-
-location.reload();
-
-},900);
-
-}
-
-});
-
 </script>
-<div id="pullRefresh">
-    <div class="refresh-ring"></div>
-    <h3>Refreshing...</h3>
-    <p>Release to refresh</p>
-</div>
 </body>
 </html>
 <!-- ==============================
@@ -2280,61 +2232,3 @@ clickSound.play().catch(()=>{});
 });
 </script>
 <style>
-    /* ==========================================
-   PREMIUM PULL TO REFRESH
-========================================== */
-
-#pullRefresh{
-    position:fixed;
-    top:-120px;
-    left:50%;
-    transform:translateX(-50%);
-    width:260px;
-    padding:18px;
-    background:rgba(15,15,15,.88);
-    backdrop-filter:blur(20px);
-    border:1px solid rgba(255,140,0,.35);
-    border-radius:22px;
-    text-align:center;
-    transition:.45s ease;
-    z-index:999999;
-    box-shadow:
-        0 10px 40px rgba(0,0,0,.45),
-        0 0 25px rgba(255,140,0,.25);
-}
-
-#pullRefresh.show{
-    top:20px;
-}
-
-.refresh-ring{
-    width:60px;
-    height:60px;
-    margin:auto;
-    border-radius:50%;
-    border:5px solid rgba(255,255,255,.15);
-    border-top:5px solid #ff8c00;
-    border-right:5px solid #ffffff;
-    animation:refreshSpin .8s linear infinite;
-    box-shadow:
-        0 0 15px #ff8c00,
-        0 0 30px rgba(255,140,0,.4);
-}
-
-#pullRefresh h3{
-    margin-top:15px;
-    font-size:22px;
-    color:#fff;
-}
-
-#pullRefresh p{
-    margin-top:6px;
-    color:#bdbdbd;
-    font-size:14px;
-}
-
-@keyframes refreshSpin{
-    100%{
-        transform:rotate(360deg);
-    }
-}
